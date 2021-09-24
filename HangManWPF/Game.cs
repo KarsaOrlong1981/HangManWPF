@@ -49,8 +49,8 @@ namespace HangManWPF
         string saveChar;
 
         System.Windows.Threading.DispatcherTimer timer;
-        System.Windows.Threading.DispatcherTimer timer2;
-        System.Windows.Threading.DispatcherTimer timer3;
+        
+      
         public Game(Canvas canvas,string mode)
         {
             modus = mode;
@@ -308,23 +308,20 @@ namespace HangManWPF
                         if (fail == true)
                         {
                             tbInstance = (sender as TextBox);
-                            timer3 = new System.Windows.Threading.DispatcherTimer();
-                            timer3.Interval = TimeSpan.FromMilliseconds(1000);
-                            timer3.Tick += new EventHandler(Timer3_Tick);
+                            tbInstance.TextChanged -= this.TextChangedHardMode;
+                            tbInstance.Text = string.Empty;
+                            tbInstance.TextChanged += this.TextChangedHardMode;
 
-                            timer3.Start();
+                            timer.Start();
                         }
                     }
 
-                    //Hit();
+                    
                 }
                 if (fail == false)
                 {
-                    tbInstance = (sender as TextBox);
-                    timer2 = new System.Windows.Threading.DispatcherTimer();
-                    timer2.Interval = TimeSpan.FromMilliseconds(1000);
-                    timer2.Tick += new EventHandler(Timer2_Tick);
-                    timer2.Start();
+                   
+                    timer.Start();
                 }
 
 
@@ -450,25 +447,8 @@ namespace HangManWPF
            
         }
 
-        private void Timer2_Tick(object sender, EventArgs e)
-        {
-            timer2.Stop();
-            gameKoordinater.Background = Brushes.Black;
+       
 
-            gameKoordinater.Foreground = Brushes.Black;
-           
-
-        }
-
-        private void Timer3_Tick(object sender, EventArgs e)
-        {
-            timer3.Stop();
-            gameKoordinater.Background = Brushes.Black;
-
-            gameKoordinater.Foreground = Brushes.Black;
-           
-            tbInstance.Text = string.Empty;
-           
-        }
+      
     }
 }
